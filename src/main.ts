@@ -15,10 +15,10 @@ import commandLineArgs from 'command-line-args'
         },
     ]
     const parsedInput = commandLineArgs(commandDefinition, { stopAtFirstUnknown: true })
-    const givenCommand = commands.get(parsedInput.command)
+    let givenCommand = commands.get(parsedInput.command)
 
     if (givenCommand === undefined) {
-        return
+        givenCommand = commands.get('show')!!
     }
 
     const argv = parsedInput._unknown || []

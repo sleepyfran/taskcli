@@ -28,15 +28,22 @@ const getOrCreateStorageFile = (name: string) => {
         fs.mkdirSync(appFolder)
     }
 
+    if (!fs.existsSync(filePath)) {
+        console.log('Hola?')
+        fs.writeFileSync(filePath, '', 'utf-8')
+    }
+
     return filePath
 }
 
 /**
  * Reads the tasks file and retrieves the saved tasks.
  */
-const getTasks = () => {
+const getTasks = (): Task[] => {
     const tasksFile = getOrCreateStorageFile(Config.storage.tasksFile())
     const fileContent = fs.readFileSync(tasksFile, 'utf-8')
+
+    if (fileContent === '') return []
 
     return JSON.parse(fileContent)
 }

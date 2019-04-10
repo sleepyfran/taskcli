@@ -40,7 +40,7 @@ This will organize each task by tag when you display them.
 taskcli note id 'This note will be shown '
 ```
 
-### Displaying created tasks `(not implemented yet)`
+### Displaying created tasks
 
 `Note`: `id` represents the number show with the task
 
@@ -53,7 +53,7 @@ taskcli
 If you want to show only the content of a tag:
 
 ```bash
-taskcli show tagname
+taskcli show --tag tagname
 ```
 
 #### Filters

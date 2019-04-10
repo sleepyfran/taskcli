@@ -5,11 +5,23 @@ import { last } from 'lodash'
 /**
  * Returns the tasks specified by the user and a status flag.
  */
-const getTasks = (): [Task[], string] => {
+const getTasksByTag = (tag?: string): [Map<string, Task[]>, string] => {
     try {
-        return [Storage.getTasks(), '']
+        let tasks = Storage.getTasks()
+
+        if (tag) {
+            tasks = tasks.filter(t => t.tag === tag)
+        }
+
+        const tasksByTag = new Map<string, Task[]>()
+        tasks.forEach(t => {
+            const currentTagTasks = tasksByTag.get(t.tag) || []
+            tasksByTag.set(t.tag, [...currentTagTasks, t])
+        })
+
+        return [tasksByTag, '']
     } catch (error) {
-        return [[], 'Error accessing the storage']
+        return [new Map(), 'Error accessing the storage']
     }
 }
 
@@ -27,7 +39,7 @@ const saveTasks = (tasks: Task[]) => {
  * @param tag Tag associated with the task.
  */
 const createTask = (text: string, tag: string) => {
-    const [tasks] = getTasks()
+    const tasks = Storage.getTasks()
     const lastId = (last(tasks) || { id: 0 }).id
     const createdTask: Task = {
         id: lastId + 1,
@@ -41,6 +53,6 @@ const createTask = (text: string, tag: string) => {
 }
 
 export default {
-    getTasks,
+    getTasksByTag,
     createTask,
 }

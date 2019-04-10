@@ -1,4 +1,5 @@
 import CreateCommand from './create.command'
+import ShowCommand from './show.command'
 import Command from './command'
 
 /**
@@ -8,6 +9,7 @@ import Command from './command'
 export default {
     map: () => {
         const createCommand = new CreateCommand()
-        return new Map<string, Command>([[createCommand.name, createCommand]])
+        const showCommand = new ShowCommand()
+        return new Map<string, Command>([[createCommand.name, createCommand], [showCommand.name, showCommand]])
     },
 }
