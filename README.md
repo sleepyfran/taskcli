@@ -59,11 +59,12 @@ taskcli show --tag tagname
 #### Filters
 
 You can also add additional filters to the `show` command (specifying or not a tag name):
-|Flag |Displays |
-|-----|---------|
-|`-d` or `--done`|Shows tasks marked as done |
-|`-p` or `--pending`|Shows tasks marked as pending|
-|`-a` or `--archived`|Shows archived tasks|
+
+| Flag                 | Displays                      |
+| -------------------- | ----------------------------- |
+| `-d` or `--done`     | Shows tasks marked as done    |
+| `-p` or `--pending`  | Shows tasks marked as pending |
+| `-a` or `--archived` | Shows archived tasks          |
 
 For example:
 
