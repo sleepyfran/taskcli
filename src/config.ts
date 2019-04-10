@@ -6,6 +6,7 @@ export const textColor = () => '#E5E5E7'
 export const pendingColor = () => '#EFA9AE'
 export const doneColor = () => '#A7E8BD'
 export const errorColor = () => '#9B1D20'
+export const warningColor = () => '#F3A712'
 
 /* Storage. */
 export const appFolder = () => os.homedir() + '/.taskcli'
@@ -22,6 +23,7 @@ export default {
         pendingColor,
         doneColor,
         errorColor,
+        warningColor,
     },
     storage: {
         appFolder,

@@ -1,13 +1,25 @@
 import Storage from '../storage'
 import { Task } from '../model/task'
+import { Filters } from '../model/filters'
 import { last } from 'lodash'
 
 /**
  * Returns the tasks specified by the user and a status flag.
  */
-const getTasksByTag = (tag?: string): [Map<string, Task[]>, string] => {
+const getTasksByTag = (filter: Filters, tag?: string): [Map<string, Task[]>, string] => {
     try {
         let tasks = Storage.getTasks()
+
+        switch (filter) {
+            case Filters.done:
+                tasks = tasks.filter(t => t.done)
+                break
+            case Filters.pending:
+                tasks = tasks.filter(t => !t.done)
+                break
+            case Filters.archived:
+                break
+        }
 
         if (tag) {
             tasks = tasks.filter(t => t.tag === tag)

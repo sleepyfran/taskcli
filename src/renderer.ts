@@ -34,10 +34,24 @@ const printError = (error: string) => {
 }
 
 /**
+ * Prints a warning into the screen.
+ * @param warning Description of the warning.
+ */
+const printWarning = (warning: string) => {
+    console.log(textColor(Config.colors.warningColor())(warning))
+}
+
+/**
  * Prints a new line in the screen.
  */
 const printNewLine = () => {
     console.log('\n')
 }
 
-export default { printTitle, printTask, printError, printNewLine }
+export default {
+    printTitle,
+    printTask,
+    printError,
+    printNewLine,
+    printWarning,
+}

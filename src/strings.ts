@@ -8,4 +8,7 @@ export default {
     titles: {
         uncategorized: 'Uncategorized',
     },
+    warnings: {
+        featureNotImplemented: (feature: string) => `Feature ${feature} not implemented yet. Ignoring option.`,
+    },
 }
