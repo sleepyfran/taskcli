@@ -2,7 +2,7 @@ import CommandsMap from './commands/index'
 import commandLineArgs from 'command-line-args'
 
 /**
- * Executes the command parser and executes the command if it was found.
+ * Parses the user input and executes the command if it was found.
  */
 ;(async () => {
     const commands = CommandsMap.map()

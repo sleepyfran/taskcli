@@ -16,7 +16,7 @@ npm install -g taskcli
 
 ## Usage
 
-### Creating a new task `(not implemented yet)`
+### Creating a new task
 
 ```bash
 taskcli create 'Implement new features in taskcli'

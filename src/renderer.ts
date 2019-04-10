@@ -9,7 +9,7 @@ const textColor = (color: string) => chalk.hex(color)
  * @param title Title to print.
  */
 export const printTitle = (title: string) => {
-    console.log(textColor(Config.titleColor())(title))
+    console.log(textColor(Config.colors.titleColor())(title))
 }
 
 /**
@@ -19,10 +19,18 @@ export const printTitle = (title: string) => {
  */
 export const printTask = (task: Task) => {
     console.log(
-        textColor(Config.textColor())(`${task.id}. `),
-        task.done ? textColor(Config.doneColor())('◉') : textColor(Config.pendingColor())('○'),
-        textColor(Config.textColor())(task.text),
+        textColor(Config.colors.textColor())(`${task.id}. `),
+        task.done ? textColor(Config.colors.doneColor())('◉') : textColor(Config.colors.pendingColor())('○'),
+        textColor(Config.colors.textColor())(task.text),
     )
 }
 
-export default { printTitle, printTask }
+/**
+ * Prints an error into the screen.
+ * @param error Description of the error.
+ */
+export const printError = (error: string) => {
+    console.log(textColor(Config.colors.errorColor())(error))
+}
+
+export default { printTitle, printTask, printError }
