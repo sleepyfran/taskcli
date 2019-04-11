@@ -90,7 +90,7 @@ taskcli done id
 taskcli d id
 ```
 
-### Marking a task as pending `(not implemented yet)`
+### Marking a task as pending
 
 ```bash
 taskcli pending id

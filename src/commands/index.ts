@@ -1,6 +1,7 @@
 import CreateCommand from './create.command'
 import ShowCommand from './show.command'
 import DoneCommand from './done.command'
+import PendingCommand from './pending.command'
 import Command from './command'
 
 /**
@@ -12,10 +13,12 @@ export default {
         const createCommand = new CreateCommand()
         const showCommand = new ShowCommand()
         const doneCommand = new DoneCommand()
+        const pendingCommand = new PendingCommand()
         return new Map<string, Command>([
             [createCommand.name, createCommand],
             [showCommand.name, showCommand],
             [doneCommand.name, doneCommand],
+            [pendingCommand.name, pendingCommand],
         ])
     },
 }
