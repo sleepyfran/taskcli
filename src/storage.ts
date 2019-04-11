@@ -29,7 +29,6 @@ const getOrCreateStorageFile = (name: string) => {
     }
 
     if (!fs.existsSync(filePath)) {
-        console.log('Hola?')
         fs.writeFileSync(filePath, '', 'utf-8')
     }
 

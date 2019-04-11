@@ -82,7 +82,7 @@ You can show a task in detail, which will show any note that the task includes, 
 taskcli show id
 ```
 
-### Marking a task as done `(not implemented yet)`
+### Marking a task as done
 
 ```bash
 taskcli done id

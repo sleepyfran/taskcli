@@ -4,6 +4,28 @@ import { Filters } from '../model/filters'
 import { last } from 'lodash'
 
 /**
+ * Saves the specified tasks into the storage
+ * @param tasks Tasks to save.
+ */
+const saveTasks = (tasks: Task[]) => {
+    Storage.saveTasks(tasks)
+}
+
+/**
+ * Saves the specified task into the storage.
+ * @param task Task to save.
+ */
+const saveTask = (task: Task) => {
+    const tasks = Storage.getTasks()
+    const taskArrayIndex = tasks.findIndex(t => t.id === task.id)
+
+    if (taskArrayIndex === -1) return
+
+    tasks[taskArrayIndex] = task
+    return saveTasks(tasks)
+}
+
+/**
  * Returns the tasks specified by the user and a status flag.
  */
 const getTasksByTag = (filter: Filters, tag?: string): [Map<string, Task[]>, string] => {
@@ -38,11 +60,37 @@ const getTasksByTag = (filter: Filters, tag?: string): [Map<string, Task[]>, str
 }
 
 /**
- * Saves the specified tasks into the storage
- * @param tasks Tasks to save.
+ * Finds a task with the specified ID.
+ * @param id Id of the task to retrieve.
  */
-const saveTasks = (tasks: Task[]) => {
-    Storage.saveTasks(tasks)
+const getTaskById = (id: number): Task | undefined => {
+    try {
+        let tasks = Storage.getTasks()
+        return tasks.find(t => t.id === id)
+    } catch (error) {
+        return undefined
+    }
+}
+
+/**
+ * Marks a task with the specified status.
+ * @param id Id of the task to modify.
+ * @param done Status of the task. True if done, false if pending.
+ */
+const markTaskAs = (id: number, done: boolean): Task | undefined => {
+    try {
+        const specifiedTask = getTaskById(id)
+
+        if (!specifiedTask) {
+            return undefined
+        }
+
+        specifiedTask.done = done
+        saveTask(specifiedTask)
+        return specifiedTask
+    } catch (error) {
+        return undefined
+    }
 }
 
 /**
@@ -66,5 +114,7 @@ const createTask = (text: string, tag: string) => {
 
 export default {
     getTasksByTag,
+    getTaskById,
     createTask,
+    markTaskAs,
 }
