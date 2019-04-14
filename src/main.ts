@@ -1,12 +1,10 @@
-import CommandsMap from './commands/index'
+import Commands from './commands/commands'
 import commandLineArgs from 'command-line-args'
 
 /**
  * Parses the user input and executes the command if it was found.
  */
 ;(async () => {
-    const commands = CommandsMap.map()
-
     // Define a default flag that will be the command to execute.
     const commandDefinition = [
         {
@@ -15,10 +13,10 @@ import commandLineArgs from 'command-line-args'
         },
     ]
     const parsedInput = commandLineArgs(commandDefinition, { stopAtFirstUnknown: true })
-    let givenCommand = commands.get(parsedInput.command)
+    let givenCommand = Commands.get(parsedInput.command)
 
     if (givenCommand === undefined) {
-        givenCommand = commands.get('show')!!
+        givenCommand = Commands.get('show')!!
     }
 
     const argv = parsedInput._unknown || []
