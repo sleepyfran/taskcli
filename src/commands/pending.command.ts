@@ -25,7 +25,7 @@ export default class PendingCommand implements Command {
         const task = TaskService.markTaskAs(+options.taskId, false)
 
         if (!task) {
-            return Renderer.printError(Strings.error.nonMatchingTasks('id'))
+            return Renderer.printError(Strings.error.noMatchingTasks('id'))
         }
 
         Renderer.printTitle(Strings.messages.taskMarkedAsPending(task))

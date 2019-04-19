@@ -7,7 +7,7 @@ export default {
             'modified outside this app. \nRun taskcli reset to remove the config file (this will remove your data) ' +
             'or open the file to fix the errors manually.',
         noIdProvided: '✖️  No task ID provided',
-        nonMatchingTasks: (property: string) => `✖️  Non matching tasks with the specified ${property}`,
+        noMatchingTasks: (property: string) => `✖️  No matching tasks with the specified ${property}`,
     },
     messages: {
         taskMarkedAsDone: (task: Task) => `✔  Task with id ${task.id} marked as done`,
