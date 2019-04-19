@@ -12,6 +12,7 @@ export default {
     messages: {
         taskMarkedAsDone: (task: Task) => `✔  Task with id ${task.id} marked as done`,
         taskMarkedAsPending: (task: Task) => `✔  Task with id ${task.id} marked as pending`,
+        taskRemoved: (task: Task) => `✔  Task with id ${task.id} removed`,
     },
     titles: {
         uncategorized: 'Uncategorized',

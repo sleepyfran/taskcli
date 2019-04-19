@@ -94,6 +94,27 @@ const markTaskAs = (id: number, done: boolean): Task | undefined => {
 }
 
 /**
+ * Removes a task from the storage.
+ * @param id Id of the task to remove.
+ */
+const removeTask = (id: number): Task | undefined => {
+    try {
+        const tasks = Storage.getTasks()
+        const specifiedTask = tasks.find(t => t.id === id)
+
+        if (!specifiedTask) {
+            return undefined
+        }
+
+        const tasksWithoutSpecified = tasks.filter(t => t.id !== id)
+        saveTasks(tasksWithoutSpecified)
+        return specifiedTask
+    } catch (error) {
+        return undefined
+    }
+}
+
+/**
  * Creates and saves a new task.
  * @param text Text of the task.
  * @param tag Tag associated with the task.
@@ -115,6 +136,7 @@ const createTask = (text: string, tag: string) => {
 export default {
     getTasksByTag,
     getTaskById,
+    removeTask,
     createTask,
     markTaskAs,
 }

@@ -104,7 +104,7 @@ taskcli p id
 taskcli archive id
 ```
 
-### Removing a task `(not implemented yet)`
+### Removing a task
 
 ```bash
 taskcli remove id
