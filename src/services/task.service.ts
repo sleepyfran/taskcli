@@ -32,6 +32,12 @@ const getTasksByTag = (filter: Filters, tag?: string): [Map<string, Task[]>, str
     try {
         let tasks = Storage.getTasks()
 
+        // If no filter or a filter other than the archived one was specified, apply
+        // a non-archived tasks filter.
+        if (!filter || filter !== Filters.archived) {
+            tasks = tasks.filter(t => !t.archived)
+        }
+
         switch (filter) {
             case Filters.done:
                 tasks = tasks.filter(t => t.done)
@@ -40,6 +46,7 @@ const getTasksByTag = (filter: Filters, tag?: string): [Map<string, Task[]>, str
                 tasks = tasks.filter(t => !t.done)
                 break
             case Filters.archived:
+                tasks = tasks.filter(t => t.archived)
                 break
         }
 
@@ -73,11 +80,11 @@ const getTaskById = (id: number): Task | undefined => {
 }
 
 /**
- * Marks a task with the specified status.
- * @param id Id of the task to modify.
- * @param done Status of the task. True if done, false if pending.
+ * General function to apply a function after recovering a task from the storage, if it exists.
+ * @param id Id of the task to retrieve and modify.
+ * @param marker Function to apply to the task.
  */
-const markTaskAs = (id: number, done: boolean): Task | undefined => {
+const saveMapTask = (id: number, marker: (task: Task) => Task): Task | undefined => {
     try {
         const specifiedTask = getTaskById(id)
 
@@ -85,12 +92,37 @@ const markTaskAs = (id: number, done: boolean): Task | undefined => {
             return undefined
         }
 
-        specifiedTask.done = done
-        saveTask(specifiedTask)
-        return specifiedTask
+        const modifiedTask = marker(specifiedTask)
+        saveTask(modifiedTask)
+        return modifiedTask
     } catch (error) {
         return undefined
     }
+}
+
+/**
+ * Marks a task with the specified status.
+ * @param id Id of the task to modify.
+ * @param done Status of the task. True if done, false if pending.
+ */
+const markTaskAs = (id: number, done: boolean): Task | undefined => {
+    return saveMapTask(id, task => ((task.done = done), task))
+}
+
+/**
+ * Archives a task.
+ * @param id Id of the task to archive.
+ */
+const archiveTask = (id: number): Task | undefined => {
+    return saveMapTask(id, task => ((task.archived = true), task))
+}
+
+/**
+ * Restores a task.
+ * @param id Id of the task to restore.
+ */
+const restoreTask = (id: number): Task | undefined => {
+    return saveMapTask(id, task => ((task.archived = false), task))
 }
 
 /**
@@ -127,6 +159,7 @@ const createTask = (text: string, tag: string) => {
         text: text,
         done: false,
         tag,
+        archived: false,
     }
 
     saveTasks([...tasks, createdTask])
@@ -139,4 +172,6 @@ export default {
     removeTask,
     createTask,
     markTaskAs,
+    archiveTask,
+    restoreTask,
 }

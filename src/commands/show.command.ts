@@ -42,7 +42,7 @@ export default class ShowCommand implements Command {
         const [tasksByTag, error] = TaskService.getTasksByTag(filter, options.tag)
 
         if (error) {
-            Renderer.printError(Strings.error.loadingTasks)
+            return Renderer.printError(Strings.error.loadingTasks)
         }
 
         if (isEmpty(tasksByTag)) {
@@ -56,9 +56,5 @@ export default class ShowCommand implements Command {
             })
             Renderer.printNewLine()
         })
-
-        if (options.archived) {
-            Renderer.printWarning(Strings.warnings.featureNotImplemented('archived'))
-        }
     }
 }

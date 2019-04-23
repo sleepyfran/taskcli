@@ -98,10 +98,16 @@ taskcli pending id
 taskcli p id
 ```
 
-### Archiving a task `(not implemented yet)`
+### Archiving a task
 
 ```bash
 taskcli archive id
+```
+
+### Recovering a task from the archive
+
+```bash
+taskcli restore id
 ```
 
 ### Removing a task

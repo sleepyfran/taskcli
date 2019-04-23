@@ -13,6 +13,8 @@ export default {
         taskMarkedAsDone: (task: Task) => `✔  Task with id ${task.id} marked as done`,
         taskMarkedAsPending: (task: Task) => `✔  Task with id ${task.id} marked as pending`,
         taskRemoved: (task: Task) => `✔  Task with id ${task.id} removed`,
+        taskArchived: (task: Task) => `✔  Task with id ${task.id} archived`,
+        taskRestored: (task: Task) => `✔  Task with id ${task.id} restored from the archive`,
     },
     titles: {
         uncategorized: 'Uncategorized',

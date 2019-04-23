@@ -4,6 +4,8 @@ import DoneCommand from './done.command'
 import PendingCommand from './pending.command'
 import Command from './command'
 import RemoveCommand from './remove.command'
+import ArchiveCommand from './archive.command'
+import RestoreCommand from './restore.command'
 
 const commandList: Command[] = [
     new ShowCommand(),
@@ -11,6 +13,8 @@ const commandList: Command[] = [
     new DoneCommand(),
     new PendingCommand(),
     new RemoveCommand(),
+    new ArchiveCommand(),
+    new RestoreCommand(),
 ]
 
 /**
